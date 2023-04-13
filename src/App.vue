@@ -1,9 +1,46 @@
+<script>
+import themes from "./themes";
+
+export default {
+  data() {
+    return {
+      themes,
+      theme: themes[0],
+    };
+  },
+  methods: {
+    handleTheme(type) {
+      // find the theme in themes variable
+      var filtered = themes.filter(function (item) {
+        return item.type === type;
+      });
+
+      // get the actual existing theme
+      if (filtered.length >= 1) {
+        this.theme = filtered[0];
+      } else {
+        this.theme = themes[0];
+      }
+      // do stuff on this website
+      document.documentElement.className = this.theme.plate;
+
+      // save to user's setting
+      // localStorage.setItem("theme", this.theme.type)
+    },
+  },
+  mounted() {
+    // get the user's setting
+    this.handleTheme(/*localStorage.getItem("theme")*/);
+  },
+};
+</script>
+
 <template>
-  <div class="p-sm-5" v-bind:class="theme.plate">
+  <div class="p-sm-5" :class="theme.plate">
     <div
       class="card mb-4 mx-auto"
       style="max-width: 640px"
-      v-bind:class="theme.plate"
+      :class="theme.plate"
     >
       <div class="card-body">
         <div class="row">
@@ -30,7 +67,7 @@
               class="btn"
               href="https://zummon.page/"
               target="_blank"
-              v-bind:class="theme.button"
+              :class="theme.button"
             >
               Made by zummon
             </a>
@@ -40,7 +77,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-sm-8 col-lg-6">
-        <div v-bind:class="theme.svgcolor">
+        <div :class="theme.svgcolor">
           <!-- https://undraw.co/ -->
           <svg
             class="img-fluid"
@@ -149,7 +186,7 @@
             />
           </svg>
         </div>
-        <div class="card" v-bind:class="theme.card">
+        <div class="card" :class="theme.card">
           <div class="card-body">
             <div class="row">
               <div class="col-sm">
@@ -159,14 +196,14 @@
               <div class="col-sm-auto">
                 <select
                   class="form-select form-select-lg"
-                  v-bind:size="themes.length"
-                  v-bind:value="theme.type"
-                  v-on:change="handleTheme($event.currentTarget.value)"
+                  :size="themes.length"
+                  :value="theme.type"
+                  @change="handleTheme($event.currentTarget.value)"
                 >
                   <option
                     v-for="item in themes"
-                    v-bind:value="item.type"
-                    v-bind:key="item.type"
+                    :value="item.type"
+                    :key="item.type"
                   >
                     {{ item.name }}
                   </option>
@@ -185,42 +222,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import themes from "./themes";
-
-export default {
-  name: "App",
-  components: {},
-  data() {
-    return {
-      themes,
-      theme: themes[0],
-    };
-  },
-  methods: {
-    handleTheme(type) {
-      // find the theme in themes variable
-      var filtered = themes.filter(function (item) {
-        return item.type === type;
-      });
-
-      // get the actual existing theme
-      if (filtered.length >= 1) {
-        this.theme = filtered[0];
-      } else {
-        this.theme = themes[0];
-      }
-      // do stuff on this website
-      document.documentElement.className = this.theme.plate;
-
-      // save to user's setting
-      // localStorage.setItem("theme", this.theme.type)
-    },
-  },
-  mounted() {
-    // get the user's setting
-    this.handleTheme(/*localStorage.getItem("theme")*/);
-  },
-};
-</script>
