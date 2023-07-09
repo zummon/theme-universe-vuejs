@@ -63,14 +63,7 @@ export default {
           </div>
           <div class="col-sm text-center text-sm-end mt-4 mt-sm-0">
             <h1>Theme Universe</h1>
-            <a
-              class="btn"
-              href="https://zummon.page/"
-              target="_blank"
-              :class="theme.button"
-            >
-              Made by zummon
-            </a>
+            <a class="btn" :class="theme.button"> Made by zummon </a>
           </div>
         </div>
       </div>
