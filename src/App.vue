@@ -4,6 +4,10 @@ import Svg from './Svg.vue'
 import Icon from './icon.vue'
 
 export default {
+  components: {
+    Svg, 
+    Icon
+  },
   data() {
     return {
       themes,
